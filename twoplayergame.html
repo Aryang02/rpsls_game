@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Let's Play!</title>
+</head>
+
+<body class="gameBody">
+    <h1 class="gameHeading">Rock Paper Scissor Lizard Spock Game</h1>
+    <h2 class="playerTurn"></h2>
+    <!-- Options -->
+
+    <button onclick="
+        if(cnt<=3){
+            if(flag === 0){
+                userInput1 = 'Rock';
+                flag = 1;
+            }else if(flag === 1){
+                playGame(userInput1, 'Rock');
+                flag = 0;
+            }
+        }else{
+            alert('Start a new game to play');
+        }
+    " class="gameButton"><img src="Images/Rock-emoji.png" class="icon" alt="Rock"></button>
+
+
+    <button onclick="
+        if(cnt<=3){
+            if(flag === 0){
+                userInput1 = 'Paper';
+                flag = 1;
+            }else if(flag === 1){
+                playGame(userInput1, 'Paper');
+                flag = 0;
+            }
+        }else{
+            alert('Start a new game to play');
+        }
+    " class="gameButton"><img src="Images/Paper-emoji.png" class="icon" alt="Paper"></button>
+
+
+    <button onclick="
+        if(cnt<=3){
+            if(flag === 0){
+                userInput1 = 'Scissor';
+                flag = 1;
+            }else if(flag === 1){
+                playGame(userInput1, 'Scissor');
+                flag = 0;
+            }
+        }else{
+            alert('Start a new game to play');
+        }
+    " class="gameButton"><img src="Images/Scissor-emoji.png" class="icon" alt="Scissor"></button>
+
+
+    <button onclick="
+        if(cnt<=3){
+            if(flag === 0){
+                userInput1 = 'Lizard';
+                flag = 1;
+            }else if(flag === 1){
+                playGame(userInput1, 'Lizard');
+                flag = 0;
+            }
+        }else{
+            alert('Start a new game to play');
+        }
+    " class="gameButton"><img src="Images/Lizard-emoji.png" class="icon" alt="Lizard"></button>
+
+
+    <button onclick="
+        if(cnt<=3){
+            if(flag === 0){
+                userInput1 = 'Spock';
+                flag = 1;
+            }else if(flag === 1){
+                playGame(userInput1, 'Spock');
+                flag = 0;
+            }
+        }else{
+            alert('Start a new game to play');
+        }
+    " class="gameButton"><img src="Images/Spock-emoji.png" class="icon" alt="Spock"></button>
+
+    <div>
+        <p class="js-result"></p>
+        <p class="js-move"></p>
+        <p class="js-score"></p>
+    </div>
+
+    <div>
+        <button onclick="
+            alert('Score has been reset.');
+            gameStats.wins = 0;
+            gameStats.loss = 0;
+            gameStats.tie = 0;
+            document.querySelector('.js-result').innerHTML = '';
+            document.querySelector('.js-move').innerHTML = '';
+            document.querySelector('.js-score').innerHTML = `Player 1 Wins: ${gameStats.wins}, Player 2 Wins: ${gameStats.loss}, Tie: ${gameStats.tie}.`;
+            localStorage.removeItem('gameStats');
+        " class="reset">Reset Score</button><br>
+
+        <button onclick="
+            document.querySelector('.js-result').innerHTML = '';
+            document.querySelector('.js-move').innerHTML = '';
+            document.querySelector('.js-score').innerHTML = '';
+        " class="reset">Clear</button>
+    </div><br>
+
+    <a href="main.html">Go to Home</a><br>
+    <p onclick="
+        location.reload();
+    " class="newGame">Start a New Game</p>
+    <!-- Javascript -->
+    <script>
+        let gameStats = JSON.parse(localStorage.getItem('gameStats')) || {
+            wins: 0,
+            loss: 0,
+            tie: 0
+        };
+        let userInput1;
+        let flag = 0;
+        let cnt = 1; 
+        function playGame(userInput1, userInput2) {
+            let res = '';
+            if (userInput1 === 'Rock') {
+                if (userInput2 === 'Rock') {
+                    res = 'Tie.';
+                    gameStats.tie++;
+                } else if (userInput2 === 'Paper') {
+                    res = 'Player 2 Win.';
+                    gameStats.loss++;
+                } else if (userInput2 === 'Scissor') {
+                    res = 'Player 1 Win.';
+                    gameStats.wins++;
+                } else if (userInput2 === 'Lizard') {
+                    res = 'Player 1 Win.';
+                    gameStats.wins++;
+                } else if (userInput2 === 'Spock') {
+                    res = 'Player 2 Win.';
+                    gameStats.loss++;
+                }
+            } else if (userInput1 === 'Paper') {
+                if (userInput2 === 'Rock') {
+                    res = 'Player 1 Win.';
+                    gameStats.wins++;
+                } else if (userInput2 === 'Paper') {
+                    res = 'Tie.';
+                    gameStats.tie++;
+                } else if (userInput2 === 'Scissor') {
+                    res = 'Player 2 Win.';
+                    gameStats.loss++;
+                } else if (userInput2 === 'Lizard') {
+                    res = 'Player 2 Win.';
+                    gameStats.loss++;
+                } else if (userInput2 === 'Spock') {
+                    res = 'Player 1 Win.';
+                    gameStats.wins++;
+                }
+            } else if (userInput1 === 'Scissor') {
+                if (userInput2 === 'Rock') {
+                    res = 'Player 2 Win.';
+                    gameStats.loss++;
+                } else if (userInput2 === 'Paper') {
+                    res = 'Player 1 Win.';
+                    gameStats.wins++;
+                } else if (userInput2 === 'Scissor') {
+                    res = 'Tie.';
+                    gameStats.tie++;
+                } else if (userInput2 === 'Lizard') {
+                    res = 'Player 1 Win.';
+                    gameStats.wins++;
+                } else if (userInput2 === 'Spock') {
+                    res = 'Player 2 Win.';
+                    gameStats.loss++;
+                }
+            } else if (userInput1 === 'Lizard') {
+                if (userInput2 === 'Rock') {
+                    res = 'Player 2 Win.';
+                    gameStats.loss++;
+                } else if (userInput2 === 'Paper') {
+                    res = 'Player 1 Win.';
+                    gameStats.wins++;
+                } else if (userInput2 === 'Scissor') {
+                    res = 'Player 2 Win.';
+                    gameStats.loss++;
+                } else if (userInput2 === 'Lizard') {
+                    res = 'Tie.';
+                    gameStats.tie++;
+                } else if (userInput2 === 'Spock') {
+                    res = 'Player 1 Win.';
+                    gameStats.wins++;
+                }
+            } else if (userInput1 === 'Spock') {
+                if (userInput2 === 'Rock') {
+                    res = 'Player 1 Win.';
+                    gameStats.wins++;
+                } else if (userInput2 === 'Paper') {
+                    res = 'Player 2 Win.';
+                    gameStats.loss++;
+                } else if (userInput2 === 'Scissor') {
+                    res = 'Player 1 Win.';
+                    gameStats.wins++;
+                } else if (userInput2 === 'Lizard') {
+                    res = 'Player 2 Win.';
+                    gameStats.loss++;
+                } else if (userInput2 === 'Spock') {
+                    res = 'Tie.';
+                    gameStats.tie++;
+                }
+            }
+            cnt++;
+            localStorage.setItem('gameStats', JSON.stringify(gameStats));
+            displayResult(userInput1, userInput2, res);
+        }
+
+        
+
+        function displayResult(userInput1 = 0, userInput2 = 0, res = 0) {
+            if(cnt<=3){
+                document.querySelector('.js-result').innerText = `${res}`;
+                if (userInput1 && userInput2 && res) {
+                    document.querySelector('.js-move').innerHTML = `
+                    Player 1 Move: <img src="Images/${userInput1}-emoji.png" alt="${userInput1}"> 
+                    Player 2 Move: <img src="Images/${userInput2}-emoji.png" alt="${userInput2}">
+                    `;
+                }
+                document.querySelector('.js-score').innerText = `Player 1 Wins: ${gameStats.wins}, Player 2 Wins: ${gameStats.loss}, Tie: ${gameStats.tie}.`;
+            }else{
+                if(gameStats.wins < gameStats.loss){
+                    document.querySelector('.js-result').innerText = `Player 2 Wins!`;
+                }else if(gameStats.wins > gameStats.loss){
+                    document.querySelector('.js-result').innerText = `Player 1 Wins!`;
+                }
+                document.querySelector('.js-score').innerText = `Player 1 Wins: ${gameStats.wins}, Player 2 Wins: ${gameStats.loss}, Tie: ${gameStats.tie}.`;
+            }
+        }
+    </script>
+</body>
+
+</html>

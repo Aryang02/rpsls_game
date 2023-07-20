@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300;1,500&family=Poppins:wght@200;300&display=swap');
+
+.welcomeHeading{
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.Home{
+    background-color: grey;
+    /* text-align: left; */
+}
+
+.Home1{
+    background-color: black;
+    /* text-align: left; */
+}
+
+.Home2{
+    background-color: rgb(50, 49, 49);
+    /* text-align: left; */
+}
+
+body{
+    background-color: black;
+    font-family: 'Poppins';
+    font-weight: 300;
+    font-size: larger;
+    color: azure;
+    /* align-items: center; */
+    text-align: center;
+}
+
+.gameHeading{
+    font-size:xx-large;
+    margin-bottom: 50px;
+}
+
+.icon{
+    /* height: 400px; */
+    width: 150px;
+    padding: 15px 15px;
+    cursor: pointer;
+    align-items: center;
+}
+
+.ruleList{
+    text-align: center;
+    display: inline-block;
+}
+.gameButton{
+    background-color: black;
+    border: 10px solid white;
+    border-radius: 140px;
+    height: fit-content;
+    width: fit-content;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.reset{
+    background-color: aliceblue;
+    color: slategrey;
+    padding: 15px 15px;
+    font-size: larger;
+    font-weight: bold;
+    margin: 10px;
+    align-items: center;
+    cursor: pointer;
+}
+
+a{
+    color: aqua;
+}
+
+.newGame{
+    margin-top: 5px;
+    color: aqua;
+    border-bottom: 1px solid aqua;
+    display: inline-block;
+    cursor: pointer;
+}

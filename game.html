@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Let's Play!</title>
+</head>
+
+<body class="gameBody">
+    <h1 class="gameHeading">Rock Paper Scissor Lizard Spock Game</h1>
+    <!-- Player's Moves Options -->
+    <button onclick="
+        playGame('Rock');
+    " class="gameButton"><img src="Images/Rock-emoji.png" class="icon" alt="Rock"></button>
+
+    
+    <button onclick="
+        playGame('Paper');
+    " class="gameButton"><img src="Images/Paper-emoji.png" class="icon" alt="Paper"></button>
+    
+    
+    <button onclick="
+        playGame('Scissor');
+    " class="gameButton"><img src="Images/Scissor-emoji.png" class="icon" alt="Scissor"></button>
+
+
+    <button onclick="
+        playGame('Lizard');
+    " class="gameButton"><img src="Images/Lizard-emoji.png" class="icon" alt="Lizard"></button>
+
+
+    <button onclick="
+        playGame('Spock');
+    " class="gameButton"><img src="Images/Spock-emoji.png" class="icon" alt="Spock"></button>
+    <!-- Game Statistics -->
+    <div>
+        <p class="js-result"></p>
+        <p class="js-move"></p>
+        <p class="js-score"></p>
+    </div>
+    <!-- Resetting the score and Clearing the onscreen results -->
+    <div>
+        <button onclick="
+            alert('Score has been reset.');
+            gameStats.wins = 0;
+            gameStats.loss = 0;
+            gameStats.tie = 0;
+            document.querySelector('.js-result').innerHTML = '';
+            document.querySelector('.js-move').innerHTML = '';
+            document.querySelector('.js-score').innerHTML = `Wins: ${gameStats.wins}, Loss: ${gameStats.loss}, Tie: ${gameStats.tie}.`;
+            localStorage.removeItem('gameStats');
+        " class="reset">Reset Score</button><br>
+        
+        <button onclick="
+            document.querySelector('.js-result').innerHTML = '';
+            document.querySelector('.js-move').innerHTML = '';
+            document.querySelector('.js-score').innerHTML = '';
+        " class="reset">Clear</button>
+    </div>
+    <!-- Link to Home Page -->
+    <a href="main.html">Go to Home</a>
+
+    <!-- Javascript -->
+    <script>
+        let gameStats = JSON.parse(localStorage.getItem('gameStats')) || {
+            wins: 0,
+            loss: 0,
+            tie: 0
+        };
+        /*function for playing the game*/
+        function playGame(userInput){
+            const computerMove = getComputerMove();
+            let res = '';
+            /*calculate the results*/
+            if(userInput === 'Rock'){
+                if(computerMove === 'Rock'){
+                    res = 'Tie.';
+                    gameStats.tie++;
+                }else if(computerMove === 'Paper'){
+                    res = 'You Lose.';
+                    gameStats.loss++;
+                }else if(computerMove === 'Scissor'){
+                    res = 'You Win.';
+                    gameStats.wins++;
+                }else if(computerMove === 'Lizard'){
+                    res = 'You Win.';
+                    gameStats.wins++;
+                }else if(computerMove === 'Spock'){
+                    res = 'You Lose.';
+                    gameStats.loss++;
+                }
+            }else if(userInput === 'Paper'){
+                if(computerMove === 'Rock'){
+                    res = 'You Win.';
+                    gameStats.wins++;
+                }else if(computerMove === 'Paper'){
+                    res = 'Tie.';
+                    gameStats.tie++;
+                }else if(computerMove === 'Scissor'){
+                    res = 'You Lose.';
+                    gameStats.loss++;
+                }else if(computerMove === 'Lizard'){
+                    res = 'You Lose.';
+                    gameStats.loss++;
+                }else if(computerMove === 'Spock'){
+                    res = 'You Win.';
+                    gameStats.wins++;
+                }
+            }else if(userInput === 'Scissor'){
+                if(computerMove === 'Rock'){
+                    res = 'You Lose.';
+                    gameStats.loss++;
+                }else if(computerMove === 'Paper'){
+                    res = 'You Win.';
+                    gameStats.wins++;
+                }else if(computerMove === 'Scissor'){
+                    res = 'Tie.';
+                    gameStats.tie++;
+                }else if(computerMove === 'Lizard'){
+                    res = 'You Win.';
+                    gameStats.wins++;
+                }else if(computerMove === 'Spock'){
+                    res = 'You Lose.';
+                    gameStats.loss++;
+                }
+            }else if(userInput === 'Lizard'){
+                if(computerMove === 'Rock'){
+                    res = 'You Lose.';
+                    gameStats.loss++;
+                }else if(computerMove === 'Paper'){
+                    res = 'You Win.';
+                    gameStats.wins++;
+                }else if(computerMove === 'Scissor'){
+                    res = 'You Lose.';
+                    gameStats.loss++;
+                }else if(computerMove === 'Lizard'){
+                    res = 'Tie.';
+                    gameStats.tie++;
+                }else if(computerMove === 'Spock'){
+                    res = 'You Win.';
+                    gameStats.wins++;
+                }
+            }else if(userInput === 'Spock'){
+                if(computerMove === 'Rock'){
+                    res = 'You Win.';
+                    gameStats.wins++;
+                }else if(computerMove === 'Paper'){
+                    res = 'You Lose.';
+                    gameStats.loss++;
+                }else if(computerMove === 'Scissor'){
+                    res = 'You Win.';
+                    gameStats.wins++;
+                }else if(computerMove === 'Lizard'){
+                    res = 'You Lose.';
+                    gameStats.loss++;
+                }else if(computerMove === 'Spock'){
+                    res = 'Tie.';
+                    gameStats.tie++;
+                }
+            }
+            /*storing the previous results*/
+            localStorage.setItem('gameStats', JSON.stringify(gameStats));
+            displayResult(userInput, computerMove, res);
+        }
+
+        /*Calculate computer's move*/
+        function getComputerMove(){
+            let compMove = Math.random();
+            if(0<=compMove && compMove<1/5){
+                compMove = 'Rock';
+            }else if(1/5<=compMove && compMove<2/5){
+                compMove = 'Paper';
+            }else if(2/5<=compMove && compMove<3/5){
+                compMove = 'Scissor';
+            }else if(3/5<=compMove && compMove<4/5){
+                compMove = 'Lizard';
+            }else if(4/5<=compMove && compMove<1){
+                compMove = 'Spock';
+            }
+
+            return compMove;
+        }
+
+        /*Display the results*/
+        function displayResult(userInput=0, computerMove=0, res=0){
+            document.querySelector('.js-result').innerText = `${res}`;
+            if(userInput && computerMove && res){
+                document.querySelector('.js-move').innerHTML = `
+                Your Move: <img src="Images/${userInput}-emoji.png" alt="${userInput}"> 
+                Computer: <img src="Images/${computerMove}-emoji.png" alt="${computerMove}">
+                `;
+            }
+            document.querySelector('.js-score').innerText = `Wins: ${gameStats.wins}, Loss: ${gameStats.loss}, Tie: ${gameStats.tie}.`;
+        }
+    </script>
+</body>
+</html>
